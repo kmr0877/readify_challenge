@@ -1,31 +1,47 @@
-﻿using System;
+﻿using ReadifyBank.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace ReadifyBank.Interfaces
+namespace ReadifyBank
 {
     /// <summary>
     /// Readify Bank interface
     /// </summary>
-    public interface IReadifyBank
+    public class ReadifyBank : IReadifyBank
     {
+        #region Variables and Properties
+
         /// <summary>
         /// Bank accounts list
         /// </summary>
-        IList<IAccount> AccountList { get; }
+        public IList<IAccount> AccountList { get; private set;}
         
         /// <summary>
         /// Transactions log of the bank
         /// </summary>
-        IList<IStatementRow> TransactionLog { get; }
+        public IList<IStatementRow> TransactionLog { get; set;}
 
         /// <summary>
         /// Open a home loan account
         /// </summary>
+        private int _loanAccountCounter;
+
+        /// <summary>
+        /// Stored counter for savings account
+        /// </summary>
+
+        private int _savingsAccountCounter;
+
+
+        //Account prefixes
+        private const string LOAN_ACCOUNT_PREFIX = "LN-";
+        private const string SAVINGS_ACCOUNT_PREFIX = "SV-";
+        
         /// <param name="customerName">Customer name</param>
         /// <param name="openDate">The date of the transaction</param>
         /// <returns>Opened Account</returns>
-        IAccount OpenHomeLoanAccount(string customerName, DateTimeOffset openDate);
+        private IAccount OpenHomeLoanAccount(string customerName, DateTimeOffset openDate);
 
         /// <summary>
         /// Open a saving account
