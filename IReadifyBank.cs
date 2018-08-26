@@ -37,6 +37,26 @@ namespace ReadifyBank
         //Account prefixes
         private const string LOAN_ACCOUNT_PREFIX = "LN-";
         private const string SAVINGS_ACCOUNT_PREFIX = "SV-";
+
+        //Interest rates
+        //IMP: This looks like an issue in the querstion. Monthly rate for Savings cannot be as high as 6% because otherwise if monthly is 6% then annual is 72% which is way too high
+        private const decimal SAVINGS_RATE = 6 * 12; 
+        private const decimal LOAN_RATE = 3.99M;
+
+        #endregion
+
+        #region Constructor
+
+         //Default Constructor to initialise AccountList & TransactionLog
+        public ReadifyBank()
+        {
+            AccountList = new List<IAccount>();
+            TransactionLog = new List<IStatementRow>();
+            this._loanAccountCounter = this._savingsAccountCounter = 1;
+        }
+        #endregion
+
+        #region Methods
         
         /// <param name="customerName">Customer name</param>
         /// <param name="openDate">The date of the transaction</param>
