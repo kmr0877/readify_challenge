@@ -58,6 +58,41 @@ namespace ReadifyBank
 
         #region Methods
         
+
+
+        /// <summary>
+        /// Calculate interest rate for an account to a specific time
+        /// The interest rate for Saving account is 6% monthly
+        /// The interest rate for Home loan account is 3.99% annually
+        /// </summary>
+        /// <param name="account">Customer account</param>
+        /// <param name="toDate">Calculate interest to this date</param>
+        /// <returns>The added value</returns>
+
+        public decimal CalculateInterestToDate(IAccount account, DateTimeOffset toDate)
+        {
+            if (!DoesAccountExists(account) || toDate.Date > DateTimeOffset.Now.Date)
+            {
+                return 0;
+            }
+
+            DateTimeOffset date = account.OpenedDate;
+
+            IStatementRow lastTransactionLog = TransactionLog.Where(x => x.Account.AccountNumber == account.AccountNumber).OrderByDescending(x => x.Date).FirstOrDefault();
+
+            if (lastTransactionLog != null)
+                date = lastTransactionLog.Date;
+
+            int days = (toDate - date.Date).Days;
+
+            if (account.AccountNumber.StartsWith(LOAN_ACCOUNT_PREFIX))
+                return ((account.Balance * LOAN_RATE / days) * 100) / 365; 
+            else
+                return ((account.Balance * SAVINGS_RATE / days) * 100) / 365;
+
+        }
+
+
         /// <param name="customerName">Customer name</param>
         /// <param name="openDate">The date of the transaction</param>
         /// <returns>Opened Account</returns>
