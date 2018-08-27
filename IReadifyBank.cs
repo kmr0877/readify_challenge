@@ -102,6 +102,10 @@ namespace ReadifyBank
         {
             if (!DoesAccountExists(account))
                 return null;
+
+            //when we close account we perform withdrawal.
+            PerformWithdrawal(account, account.Balance, "Withdraw available balance on event of account closure", DateTimeOffset.Now);
+            AccountList.Remove(account);
         }
 
 
