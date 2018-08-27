@@ -92,6 +92,13 @@ namespace ReadifyBank
 
         }
 
+        /// <summary>
+        /// Close an account
+        /// </summary>
+        /// <param name="account">Customer account</param>
+        /// <param name="closeDate">Close Date</param>
+        /// <returns>All transactions happened on the closed account</returns>
+        
 
         /// <param name="customerName">Customer name</param>
         /// <param name="openDate">The date of the transaction</param>
