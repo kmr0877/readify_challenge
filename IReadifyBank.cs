@@ -162,7 +162,11 @@ namespace ReadifyBank
         /// </summary>
         /// <param name="account">Customer account</param>
         /// <returns></returns>
-        decimal GetBalance(IAccount account);
+        public decimal GetBalance(IAccount account)
+        {
+            if (!DoesAccountExists(account))
+                return 0;
+        }
 
         /// <summary>
         /// Calculate interest rate for an account to a specific time
