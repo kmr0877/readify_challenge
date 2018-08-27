@@ -98,7 +98,12 @@ namespace ReadifyBank
         /// <param name="account">Customer account</param>
         /// <param name="closeDate">Close Date</param>
         /// <returns>All transactions happened on the closed account</returns>
-        
+        public IEnumerable<IStatementRow> CloseAccount(IAccount account, DateTimeOffset closeDate)
+        {
+            if (!DoesAccountExists(account))
+                return null;
+        }
+
 
         /// <param name="customerName">Customer name</param>
         /// <param name="openDate">The date of the transaction</param>
