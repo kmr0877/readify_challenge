@@ -106,6 +106,13 @@ namespace ReadifyBank
             //when we close account we perform withdrawal.
             PerformWithdrawal(account, account.Balance, "Withdraw available balance on event of account closure", DateTimeOffset.Now);
             AccountList.Remove(account);
+
+            IEnumerable<IStatementRow> closedAccountTransactionLogs = TransactionLog.Where(x => x.Account.AccountNumber == account.AccountNumber).OrderBy(x => x.Date);
+
+            //also remove from the transaction logs
+            TransactionLog = TransactionLog.Except(closedAccountTransactionLogs).ToList();
+
+            return closedAccountTransactionLogs;
         }
 
 
