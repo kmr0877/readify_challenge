@@ -169,7 +169,13 @@ namespace ReadifyBank
             return account.Balance;
         }
 
-        IEnumerable<IStatementRow> GetMiniStatement(IAccount account);
+        public IEnumerable<IStatementRow> GetMiniStatement(IAccount account);
+        {
+            if (! DoesAccountExists(account))
+                return null;
+                
+        }
+
 
         /// <summary>
         /// Close an account
