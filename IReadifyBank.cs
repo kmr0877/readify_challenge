@@ -166,23 +166,9 @@ namespace ReadifyBank
         {
             if (!DoesAccountExists(account))
                 return 0;
+            return account.Balance;
         }
 
-        /// <summary>
-        /// Calculate interest rate for an account to a specific time
-        /// The interest rate for Saving account is 6% monthly
-        /// The interest rate for Home loan account is 3.99% annually
-        /// </summary>
-        /// <param name="account">Customer account</param>
-        /// <param name="toDate">Calculate interest to this date</param>
-        /// <returns>The added value</returns>
-        decimal CalculateInterestToDate(IAccount account, DateTimeOffset toDate);
-
-        /// <summary>
-        /// Get mini statement (the last 5 transactions occurred on an account)
-        /// </summary>
-        /// <param name="account">Customer account</param>
-        /// <returns>Last five transactions</returns>
         IEnumerable<IStatementRow> GetMiniStatement(IAccount account);
 
         /// <summary>
