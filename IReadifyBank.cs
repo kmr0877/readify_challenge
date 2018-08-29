@@ -177,13 +177,12 @@ namespace ReadifyBank
             return TransactionLog.Where(x => x.Account.AccountNumber == account.AccountNumber).OrderByDescending(x => x.Date).Skip(0).Take(5);
         }
 
-
-        /// <summary>
-        /// Close an account
+         /// <summary>
+        /// Open a home loan account
         /// </summary>
-        /// <param name="account">Customer account</param>
-        /// <param name="closeDate">Close Date</param>
-        /// <returns>All transactions happened on the closed account</returns>
-        IEnumerable<IStatementRow> CloseAccount(IAccount account, DateTimeOffset closeDate);
-    }
+        /// <param name="customerName">Customer name</param>
+        /// <param name="openDate">The date of the transaction</param>
+        /// <returns>Opened Account</returns>
+
+        
 }
