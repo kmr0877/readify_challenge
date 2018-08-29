@@ -184,5 +184,16 @@ namespace ReadifyBank
         /// <param name="openDate">The date of the transaction</param>
         /// <returns>Opened Account</returns>
 
-        
+        public IAccount OpenHomeLoanAccount(string customerName, DateTimeOffset openDate)
+        {
+            if (!ValidateCustomerName(customerName) || LimitReached(LOAN_ACCOUNT_PREFIX))
+                return null;
+
+            String accountNumber = LOAN_ACCOUNT_PREFIX + _loanAccountCounter.ToString("D6");
+            Account account = new Account(accountNumber, customerName, openDate);
+            AccountList.Add(account);
+            _loanAccountCounter++;
+
+            return account;
+        }
 }
