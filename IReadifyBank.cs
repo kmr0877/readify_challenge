@@ -173,7 +173,8 @@ namespace ReadifyBank
         {
             if (! DoesAccountExists(account))
                 return null;
-                
+
+            return TransactionLog.Where(x => x.Account.AccountNumber == account.AccountNumber).OrderByDescending(x => x.Date).Skip(0).Take(5);
         }
 
 
