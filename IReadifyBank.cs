@@ -196,4 +196,25 @@ namespace ReadifyBank
 
             return account;
         }
+
+        /// <summary>
+        /// Open a saving account
+        /// </summary>
+        /// <param name="customerName">Customer name</param>
+        /// <param name="openDate">The date of the transaction</param>
+        /// <returns>Opened account</returns>
+
+        public IAccount OpenSavingsAccount(string customerName, DateTimeOffset openDate)
+        {
+            if (!ValidateCustomerName(customerName) || LimitReached(SAVINGS_ACCOUNT_PREFIX))
+                return null;
+
+            String accountNumber = SAVINGS_ACCOUNT_PREFIX + _savingsAccountCounter.ToString("D6");
+            Account account = new Account(accountNumber, customerName, openDate);
+            AccountList.Add(account);
+            _savingsAccountCounter++;
+
+            return account;
+        }
+
 }
