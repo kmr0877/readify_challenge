@@ -217,4 +217,23 @@ namespace ReadifyBank
             return account;
         }
 
+        /// <summary>
+        /// Deposit amount in an account
+        /// </summary>
+        /// <param name="account">Account</param>
+        /// <param name="amount">Deposit amount</param>
+        /// <param name="description">Description of the transaction</param>
+        /// <param name="depositDate">The date of the transaction</param>
+
+        public void PerformDeposit(IAccount account, decimal amount, string description, DateTimeOffset depositDate)
+        {
+            if (!DoesAccountExists(account) || amount <= 0 || depositDate.Date > DateTimeOffset.Now.Date)
+                return;
+
+            Account localAccount = ((Account)account);
+            localAccount.Balance += amount;
+            StatementRow statementRow = new StatementRow(localAccount, amount, localAccount.Balance, depositDate, description);
+            TransactionLog.Add(statementRow);
+        }
+
 }
