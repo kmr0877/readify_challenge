@@ -236,4 +236,32 @@ namespace ReadifyBank
             TransactionLog.Add(statementRow);
         }
 
+        
+        /// <summary>
+        /// Transfer amount from an account to an account
+        /// </summary>
+        /// <param name="from">From account</param>
+        /// <param name="to">To account</param>
+        /// <param name="amount">Transfer amount</param>
+        /// <param name="description">Description of the transaction</param>
+        /// <param name="transferDate">The date of the transaction</param>
+        public void PerformTransfer(IAccount from, IAccount to, decimal amount, string description, DateTimeOffset transferDate)
+        {
+            if (!DoesAccountExists(from) || !DoesAccountExists(to) || amount <= 0 || from.Balance < amount || transferDate.Date > DateTimeOffset.Now.Date)
+                return;
+
+            Account localFrom = (Account)from;
+            localFrom.Balance -= amount;
+
+            StatementRow statementRow = new StatementRow(localFrom, -amount, localFrom.Balance, transferDate, description);
+            TransactionLog.Add(statementRow);
+
+            Account localTo = (Account)to;
+            localTo.Balance += amount;
+
+            statementRow = new StatementRow(localTo, amount, localTo.Balance, transferDate, description);
+            TransactionLog.Add(statementRow);
+           
+        }
+
 }
