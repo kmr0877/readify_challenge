@@ -1,34 +1,38 @@
-﻿using System;
+﻿using ReadifyBank.Interfaces;
+using System;
 
-namespace ReadifyBank.Interfaces
+namespace ReadifyBank
 {
-    /// <summary>
-    /// Readify Bank IAccount Interface
-    /// There are two types of account : Home Loan and Saving 
-    /// </summary>
-    public interface IAccount
+    //Implementation of IAccount interface
+    public class Account : IAccount
     {
-        /// <summary>
-        /// The date when the account was opened
-        /// </summary>
-        DateTimeOffset OpenedDate { get; }
-        
-        /// <summary>
-        /// Customer Name
-        /// </summary>
-        string CustomerName { get; }
+        #region Properties
 
-        /// <summary>
-        /// Account number 
-        /// It is formatted as follows: 2 characters for Account type, dash and 6 digits for account number starting from 1
-        /// For home loan account it should start from "LN-000001"
-        /// For saving account it should start from "SV-000001"
-        /// </summary>
-        string AccountNumber { get; }
+        public string AccountNumber { get; private set; }
+       
+        public decimal Balance { get; set; }
+       
+        public string CustomerName { get; private set; }
         
+        public DateTimeOffset OpenedDate { get; private set; }
+        
+        #endregion
+
+        #region Constructor
         /// <summary>
-        /// Current account balance
+        /// Parameterised constructor for initiating Account
         /// </summary>
-        decimal Balance { get; }
+        /// <param name="accountNumber"></param>
+        /// <param name="customerName"></param>
+        /// <param name="openedDate"></param>
+        public Account(string accountNumber, string customerName, DateTimeOffset openedDate)
+        {
+            this.AccountNumber = accountNumber;
+            this.CustomerName = customerName;
+            this.OpenedDate = openedDate;
+            this.Balance = 0; //when account opens balance is obviously 0
+        }
+        #endregion
+
     }
 }
