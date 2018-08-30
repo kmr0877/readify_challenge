@@ -295,5 +295,18 @@ namespace ReadifyBank
             return true;
         }
 
+        /// <summary>
+        /// Validate if customer name is null or empty
+        /// </summary>
+        /// <param name="customerName"></param>
+        /// <returns></returns>
+        private bool ValidateCustomerName(string customerName)
+        {
+            if (customerName == null || customerName.Length == 0)
+                return false;
+
+            return true;
+        }
+
 
 }
