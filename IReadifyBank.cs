@@ -236,7 +236,7 @@ namespace ReadifyBank
             TransactionLog.Add(statementRow);
         }
 
-        
+
         /// <summary>
         /// Transfer amount from an account to an account
         /// </summary>
@@ -263,5 +263,24 @@ namespace ReadifyBank
             TransactionLog.Add(statementRow);
            
         }
+
+        /// <summary>
+        /// Withdraw amount in an account
+        /// </summary>
+        /// <param name="account">Account</param>
+        /// <param name="amount">Withdrawal amount</param>
+        /// <param name="description">Description of the transaction</param>
+        /// <param name="withdrawalDate">The date of the transaction</param>
+        public void PerformWithdrawal(IAccount account, decimal amount, string description, DateTimeOffset withdrawalDate)
+        {
+            if (!DoesAccountExists(account) || amount <= 0 || account.Balance < amount || withdrawalDate.Date > DateTimeOffset.Now.Date)
+                return;
+
+            Account localAccount = (Account)account;
+            localAccount.Balance -= amount;
+            StatementRow statementRow = new StatementRow(localAccount, -amount, localAccount.Balance, withdrawalDate, description);
+            TransactionLog.Add(statementRow);
+        }
+
 
 }
