@@ -309,4 +309,19 @@ namespace ReadifyBank
         }
 
 
+        /// <summary>
+        /// Check whether it is possible to accomodate more accounts?
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private bool LimitReached(string type)
+        {
+            if ((type == LOAN_ACCOUNT_PREFIX && _loanAccountCounter == 999999) ||
+                (type == SAVINGS_ACCOUNT_PREFIX && _savingsAccountCounter == 999999))
+                return false;
+
+            return true;
+        }
+
+        #endregion
 }
