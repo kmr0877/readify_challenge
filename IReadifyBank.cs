@@ -282,5 +282,18 @@ namespace ReadifyBank
             TransactionLog.Add(statementRow);
         }
 
+        /// <summary>
+        /// Check if account really exists?
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        private bool DoesAccountExists(IAccount account)
+        {
+            if (account == null || this.AccountList.Contains(account) == false)
+                return false;
+
+            return true;
+        }
+
 
 }
