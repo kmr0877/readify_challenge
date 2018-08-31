@@ -4,6 +4,7 @@ using System;
 namespace ReadifyBank
 {
     //Implementation of IAccount interface
+    
     public class Account : IAccount
     {
         #region Properties
